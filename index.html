@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Оксанка Бот</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: white;
+        text-align: center;
+    }
+
+    /* Шторка */
+    .curtain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, #800000, #400000);
+        z-index: 10;
+        animation: openCurtain 3s forwards;
+    }
+
+    @keyframes openCurtain {
+        0% { height: 100%; }
+        100% { height: 0; }
+    }
+
+    /* Контент */
+    .content {
+        display: none;
+        padding-top: 150px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .message {
+        margin-top: 30px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    /* Салют из какашек */
+    .poop {
+        position: fixed;
+        top: -50px;
+        font-size: 30px;
+        animation: fall linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="curtain"></div>
+
+<div class="content" id="content">
+    <button onclick="showMessage()">Нажмите если вы Оксанка</button>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    // Показ контента после шторки
+    setTimeout(() => {
+        document.getElementById("content").style.display = "block";
+        startPoopFireworks();
+    }, 3000);
+
+    // Салют 💩
+    function startPoopFireworks() {
+        for (let i = 0; i < 50; i++) {
+            createPoop();
+        }
+    }
+
+    function createPoop() {
+        const poop = document.createElement("div");
+        poop.className = "poop";
+        poop.textContent = "💩";
+        poop.style.left = Math.random() * 100 + "vw";
+        poop.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(poop);
+
+        setTimeout(() => {
+            poop.remove();
+        }, 5000);
+    }
+
+    // Сообщение
+    function showMessage() {
+        document.getElementById("message").textContent =
+            "Приветствую Оксанка 🎉 Поздравляем, вы Ботиха 🤖";
+    }
+</script>
+
+</body>
+</html>
